@@ -2,7 +2,16 @@ pipeline {
     agent any
     stages {
         stage('Pipeline Stages'){
-            steps {sh "ls"} }
+            steps {
+                sh "ls"
+            }
+        }
+
         stage('second stage'){
-            steps {sh “pwd” }
+            steps {
+                sh “pwd”
+            }
+        }
+
+    }
 }

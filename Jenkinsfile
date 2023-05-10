@@ -1,17 +1,22 @@
 pipeline {
     agent any
+
     stages {
-        stage('Pipeline Stages'){
+         stage('Init') {
             steps {
-                sh "ls"
+                sh 'docker rm -f $(docker ps -qa) || true'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'docker build -t myapp .'
             }
         }
 
-        stage('second stage'){
+        stage('Deploy') {
             steps {
-                sh "pwd"
+                sh 'docker run -d -p 80:5500 --name myapp myapp:latest'
             }
         }
-
     }
 }
